@@ -1,4 +1,4 @@
-function population = Selection(y)
+function [selected,all] = Selection(y)
 %Stochastic Universal Sampling
 % y = [fitness, p,d,q]
 [length,~] = size(y);
@@ -28,36 +28,34 @@ end
 r = randi([1 100]);
 selection1 = 0;
 
-for i = 1:length
+for i = length:-1:1
     
     if i ~=1
-        if y(i-1,5) < r <= y(i,5)
+        if (y(i-1,5) < r) && (r <= y(i,5))
             selection1 = i;
             break
         end
-    end
-    if y(1,5) <= r
+    else
         selection1 = i;
-        break
     end
 end
 % The same individual cannot be selected twice. if this happens another
 selection2 = selection1;
 while selection2 == selection1
     r = randi([1 100]);
-    for i = 1:length
+    for i = length:-1:1
         
         if i ~=1
-            if y(i-1,5) < r <= y(i,5)
+            if (y(i-1,5) < r) && (r <= y(i,5))
                 selection2 = i;
                 break
             end
-        end
-        if y(1,5) <= r
+        else
             selection2 = i;
-            break
+            
         end
     end
 end
-population = [y(:,selection1); y(:,selection2)]
+selected = [y(selection1,:); y(selection2,:)];
+all = y(:,1:4);
 end

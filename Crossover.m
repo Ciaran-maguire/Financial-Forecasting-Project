@@ -7,7 +7,7 @@ r = randi([1 2]);
 %Swaps genes
 if r == 1
     %Swaps D,Q Parameters
-    swap= gene1(2);
+    swap = gene1(2);
     gene1(2) = gene2(2);
     gene2(2) = swap;
     swap = gene1(3);
@@ -23,6 +23,7 @@ else
     gene2(2) = swap;
     
 end
-crossedOver = [gene1;gene2];
 
+crossedOver = [gene1;gene2];
+crossedOver = [zeros(size(crossedOver,1),1) crossedOver];
 end
